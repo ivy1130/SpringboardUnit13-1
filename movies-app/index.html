@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies App</title>
+    <style>
+        input {
+            margin: 5px;
+        }
+        button {
+            margin: 5px
+        }
+    </style>
+</head>
+<body>
+    <h1>Movies App</h1>
+    <form action="">
+        Title: <input type="text" id="movie-title">
+        <br>
+        Rating: <input type="number" id="movie-rating" min="0" max="10">
+        <br>
+        <input type="submit">
+    </form>
+    <h2>Rating Submissions</h2>
+    <div id="submissions"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $('form').on('submit', function (e) {
+            e.preventDefault()
+            let title = $('#movie-title').val()
+            let rating = $('#movie-rating').val()
+            // let newDiv = $(`<div> ${title} : ${rating}</div>`).append('<button>X</button>')
+            // $('#submissions').append(newDiv)
+            $(`<div> ${title} : ${rating}</div>`).append('<button>X</button>').appendTo($('#submissions')) // Is this a proper way to do it? From what I've seen, we'd use $() to select something that already exists in the DOM. But here, it seems like I'm making a new div and selecting it all in one line. Would this make sense for others to read?
+        })
+        $('#submissions').on('click', 'button', function (e) {
+            e.preventDefault()
+            $(this).parent().remove()
+        })
+    </script>
+</body>
+</html>
